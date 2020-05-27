@@ -48,7 +48,7 @@ print(' Математическое ожидание:', colored('%.2f' % theore
 print(' Стандартное отклонение:', colored('%.2f' % theoretical_deviation, 'yellow'))
 print(' Коэффициент вариации:', colored('%.2f' % theoretical_cv, 'yellow'))
 
-print('\nПервый алгоритм:')
+print('\nЛинейный конгруэнтный метод:')
 print(' Выборочные средние:')
 print(('  {:>9.2f}'*COUNT).format(*linear_means))
 print(' Выборочные стандартные отклонения:')
@@ -57,7 +57,7 @@ print(' Выборочные коэффициенты вариации:')
 print(('  {:>9.2f}'*COUNT).format(*linear_cvs))
 print(colored(f' {len([cv for cv in linear_cvs if cv < theoretical_cv])} из {COUNT} выборок однородны', 'yellow'))
 
-print('\nВторой алгоритм:')
+print('\nМетод Таусворта:')
 print(' Выборочные средние:')
 print(('  {:>9.2f}'*COUNT).format(*tausworth_means))
 print(' Выборочные стандартные отклонения:')
@@ -66,12 +66,12 @@ print(' Выборочные коэффициенты вариации:')
 print(('  {:>9.2f}'*COUNT).format(*tausworth_cvs))
 print(colored(f' {len([cv for cv in tausworth_cvs if cv < theoretical_cv])} из {COUNT} выборок однородны', 'yellow'))
 
-print('\n\nПервый алгоритм:')
+print('\n\nЛинейный конгруэнтный метод:')
 for i, sample in enumerate(linear_samples):
     print(f' {i}-я ', end='')
     pearson(sample)
 
-print('\nВторой алгоритм:')
+print('\nМетод Таусворта:')
 for i, sample in enumerate(tausworth_samples):
     print(f' {i}-я ', end='')
     pearson(sample)
@@ -79,18 +79,18 @@ for i, sample in enumerate(tausworth_samples):
 
 # Счётчики времени генерации (в секундах)
 timing = {
-    'Алгоритм Фибоначчи': [],
-    'Алгоритм Таусворта': [],
+    'Линейный конгруэнтный метод': [],
+    'Метод Таусворта': [],
     'random.randint()': []
 }
 
 for size in SIZES:
     check = time()
     linear(size, size)
-    timing['Алгоритм Фибоначчи'].append(time() - check)
+    timing['Линейный конгруэнтный метод'].append(time() - check)
     check = time()
     tausworth(size, size)
-    timing['Алгоритм Таусворта'].append(time() - check)
+    timing['Метод Таусворта'].append(time() - check)
     check = time()
     [randint(0, size) for _ in range(size)]
     timing['random.randint()'].append(time() - check)
