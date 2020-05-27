@@ -90,6 +90,8 @@ def timing_plot(timing: Dict[str, List[float]]) -> None:
     plt.figure(figsize=(16, 9))
     for label, values in timing.items():
         plt.plot(SIZES, values, label=label)
+    plt.xscale('log')
+    plt.yscale('log')
     plt.grid()
     plt.legend(fontsize=16)
     plt.xlabel('Объём выборки')
