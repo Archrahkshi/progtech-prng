@@ -27,7 +27,7 @@ theoretical_deviation = (((RANGE+1)**2 - 1) / 12) ** (1/2)
 theoretical_cv = theoretical_deviation / theoretical_mean
 
 # Генерируем выборки
-linear_samples = [linear(RANGE, SIZE) for _ in range(COUNT)]
+linear_samples = [linear(RANGE, SIZE, r) for r in range(1, COUNT+1)]
 tausworth_samples = [tausworth(RANGE, SIZE) for _ in range(COUNT)]
 
 # Вычисляем выборочные средние
@@ -86,7 +86,7 @@ timing = {
 
 for size in SIZES:
     check = time()
-    linear(size, size)
+    linear(size, size, size)
     timing['Линейный конгруэнтный метод'].append(time() - check)
     check = time()
     tausworth(size, size)

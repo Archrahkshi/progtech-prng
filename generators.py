@@ -3,22 +3,20 @@
   - линейного конгруэнтного метода;
   - метода Таусворта.
 """
-
-
-from typing import List
 from random import randint
+from typing import List
 
 
-def linear(range_: int, size: int) -> List[int]:
+def linear(range_: int, size: int, r: int) -> List[int]:
     """
     Генератор псевдослучайных чисел на основе линейного конгруэнтного метода.
     :param range_: Диапазон генерации.
     :param size: Объём генерируемой выборки.
+    :param r: Зерно генератора
     :return: Сгенерированная выборка из чисел.
     """
     result = []
     m, k, b = 2**31 - 1, 1_220_703_125, 7
-    r = randint(1, range_)
     for _ in range(size):
         r = (k * r + b) % m % range_
         result.append(r)
@@ -32,11 +30,11 @@ def tausworth(range_: int, size: int) -> List[int]:
     :param size: Объём генерируемой выборки.
     :return: Сгенерированная выборка из чисел.
     """
-    q = randint(14, 18)
+    q = 17
     b0 = '1'
     for i in range(q):
         b0 += str(randint(0, 1))
-    r = randint(1, q-1)
+    r = q - 1
     while q % r == 0:
         r += 1
     m = 2**q
